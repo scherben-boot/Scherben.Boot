@@ -50,6 +50,8 @@ class _ReportingViewState extends State<ReportingView> {
                     return null;
                   },
                   controller: _descriptionController,
+                  minLines: 5,
+                  maxLines: 10,
                 ),
                 ElevatedButton.icon(
                     onPressed: () {},

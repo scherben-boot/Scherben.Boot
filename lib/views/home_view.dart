@@ -20,24 +20,31 @@ class _HomeState extends State<Home> {
   final proposal = new ReportMetadata(
       "Proposal", "sommeref@dhbw-loerrach.de", "Neuer Vorschlag");
 
+  bool isWithinBoundaries = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: Padding(
-        //   padding: EdgeInsets.all(10),
-        //   child: ClipRRect(
-        //     borderRadius: BorderRadius.circular(8.0),
-        //     child: Image(
-        //       image: AssetImage('assets/dhbw_white.png'),
-        //     ),
-        //   ),
-        // ),
-        centerTitle: false,
-        title: Text('Scherben Boot',
-            style:
-                GoogleFonts.dancingScript(color: Colors.white, fontSize: 30)),
-      ),
+          // leading: Padding(
+          //   padding: EdgeInsets.all(10),
+          //   child: ClipRRect(
+          //     borderRadius: BorderRadius.circular(8.0),
+          //     child: Image(
+          //       image: AssetImage('assets/dhbw_white.png'),
+          //     ),
+          //   ),
+          // ),
+          centerTitle: false,
+          title: Text('Scherben Boot',
+              style:
+                  GoogleFonts.dancingScript(color: Colors.white, fontSize: 30)),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.my_location_outlined),
+              onPressed: () {},
+            )
+          ]),
       body: Column(children: [
         Flexible(
           flex: 3,

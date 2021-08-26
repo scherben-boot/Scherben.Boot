@@ -33,7 +33,7 @@ class LocationFormField extends FormField<Point?> {
                                   .getCurrentUserLocation();
                               state.didChange(location);
                             },
-                            icon: Icon(Icons.location_pin),
+                            icon: Icon(Icons.my_location_outlined),
                           )
                         ],
                       )
