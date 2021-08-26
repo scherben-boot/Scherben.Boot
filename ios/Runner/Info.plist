@@ -18,6 +18,10 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Die App benötigt Zugriff auf die Kamera, um Bilder in deine Meldungen aufzunehmen</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Die App benötigt Zugriff auf deinen Standort, damit die Zuständigen wissen, wo sie dein Anliegen bearbeiten sollen.</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
