@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scherben_boot/dependecy_injection/container.dart';
+import 'package:scherben_boot/services/geolocation.service.dart';
 import 'package:scherben_boot/services/services.module.dart';
 import 'package:scherben_boot/views/home_view.dart';
+import 'package:scherben_boot/views/initializing_view.dart';
 
 void main() {
   container.addModule(ServicesModule());
@@ -19,7 +21,16 @@ class ScherbenBoot extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.grey[200],
       ),
-      home: Home(),
+      home: FutureBuilder(
+          future: container.resolve<GeolocationService>().initialize(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.done:
+                return Home();
+              default:
+                return InitializingView();
+            }
+          }),
     );
   }
 }
