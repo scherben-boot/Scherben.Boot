@@ -26,7 +26,7 @@ class ScherbenBoot extends StatelessWidget {
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
-                return Home();
+                return HomeView();
               default:
                 return InitializingView();
             }

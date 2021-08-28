@@ -7,16 +7,16 @@ import 'package:scherben_boot/models/report_metadata.dart';
 import 'package:scherben_boot/services/geolocation.service.dart';
 import 'package:scherben_boot/views/reporting_view.dart';
 
-class Home extends StatefulWidget {
-  GeolocationService _geofencingService = di.container.resolve();
+class HomeView extends StatefulWidget {
+  final GeolocationService _geolocationService = di.container.resolve();
 
-  Home({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeViewState extends State<HomeView> {
   final danger = new ReportMetadata(
       "Incident", "schmidlu@dhbw-loerrach.de", "Gefahr melden");
   final proposal = new ReportMetadata(
@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    widget._geofencingService.subscribeToBoundaryChanges((boundaryReport) =>
+    widget._geolocationService.subscribeToBoundaryChanges((boundaryReport) =>
         setState(() => isWithinBoundaries = boundaryReport.isWithinBoundaries));
 
     return Scaffold(
