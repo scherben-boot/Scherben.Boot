@@ -37,43 +37,107 @@ class _ReportingViewState extends State<ReportingView> {
             key: _formKey,
             child: Column(
               children: [
-                LocationFormField(
-                  widget._geolocationService,
-                  onSaved: (value) {},
-                  validator: (value) {},
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.width * 0.25,
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: LocationFormField(
+                        widget._geolocationService,
+                        onSaved: (value) {},
+                        validator: (value) {},
+                      ),
+                    ),
+                  ),
                 ),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Bitte geben Sie eine Beschreibung an";
-                    }
-                    return null;
-                  },
-                  controller: _descriptionController,
-                  minLines: 5,
-                  maxLines: 10,
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
-                ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.image_search),
-                    label: Text("Bild anfügen")),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      final description = _descriptionController.text;
-                      final location = Point(0, 0);
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.width * 0.6,
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Bitte geben Sie eine Beschreibung an";
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                          labelText: "Beschreibung",
+                        ),
+                        controller: _descriptionController,
+                        minLines: 7,
+                        maxLines: 12,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.width * 0.4,
+                  child: Card(
+                    child: Column(children: [
+                      Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.only(left: 10.0)),
+                              Expanded(
+                                child: ElevatedButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.image_search),
+                                    label: Text("Bild anfügen")),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, right: 5.0)),
+                              Expanded(
+                                child: ElevatedButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.delete),
+                                    label: Text("Bild entfernen")),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(right: 10.0)),
+                            ],
+                          ))
+                    ]),
+                  ),
+                ),
+                Divider(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          final description = _descriptionController.text;
+                          final location = Point(0, 0);
 
-                      await widget._reportingService.sendReport(
-                          Report.fromMetadata(widget.metadata, description,
-                              attachmentPath, location));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text("Meldung wurde erstattet")),
-                      );
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Text("Senden"),
+                          await widget._reportingService.sendReport(
+                              Report.fromMetadata(widget.metadata, description,
+                                  attachmentPath, location));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Meldung wurde erstattet")),
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text("Senden"),
+                    ),
+                  ),
                 ),
               ],
             ),

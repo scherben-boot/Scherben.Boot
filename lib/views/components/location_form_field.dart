@@ -26,14 +26,22 @@ class LocationFormField extends FormField<Point?> {
                     children: [
                       Row(
                         children: [
+                          Container(
+                            width: 10,
+                            height: 10,
+                            color: Colors.blue,
+                          ),
                           Text(locationText),
-                          IconButton(
-                            onPressed: () async {
-                              final location = await geolocationService
-                                  .getCurrentUserLocation();
-                              state.didChange(location);
-                            },
-                            icon: Icon(Icons.my_location_outlined),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () async {
+                                final location = await geolocationService
+                                    .getCurrentUserLocation();
+                                state.didChange(location);
+                              },
+                              icon: Icon(Icons.my_location_outlined),
+                            ),
                           )
                         ],
                       )
