@@ -2,19 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scherben_boot/dependecy_injection/container.dart' as di;
 import 'package:scherben_boot/models/report_metadata.dart';
+import 'package:scherben_boot/services/geolocation.service.dart';
 import 'package:scherben_boot/views/reporting_view.dart';
 
-// Buttons in einer Foreach Schleife
+class HomeView extends StatefulWidget {
+  final GeolocationService _geolocationService = di.container.resolve();
 
-class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeViewState extends State<HomeView> {
   final danger = new ReportMetadata(
       "Incident", "schmidlu@dhbw-loerrach.de", "Gefahr melden");
   final proposal = new ReportMetadata(
@@ -24,27 +26,16 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    widget._geolocationService.subscribeToBoundaryChanges((boundaryReport) =>
+        setState(() => isWithinBoundaries = boundaryReport.isWithinBoundaries));
+
     return Scaffold(
       appBar: AppBar(
-          // leading: Padding(
-          //   padding: EdgeInsets.all(10),
-          //   child: ClipRRect(
-          //     borderRadius: BorderRadius.circular(8.0),
-          //     child: Image(
-          //       image: AssetImage('assets/dhbw_white.png'),
-          //     ),
-          //   ),
-          // ),
-          centerTitle: false,
-          title: Text('Scherben Boot',
-              style:
-                  GoogleFonts.dancingScript(color: Colors.white, fontSize: 30)),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.my_location_outlined),
-              onPressed: () {},
-            )
-          ]),
+        centerTitle: false,
+        title: Text('Scherben Boot',
+            style:
+                GoogleFonts.dancingScript(color: Colors.white, fontSize: 30)),
+      ),
       body: Column(children: [
         Flexible(
           flex: 3,
@@ -119,25 +110,16 @@ class _HomeState extends State<Home> {
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.yellow[700],
-                //button's fill color
                 onPrimary: Colors.white,
-                //specify the color of the button's text and icons as well as the overlay colors used to indicate the hover, focus, and pressed states
                 onSurface: Colors.orange,
-                //specify the button's disabled text, icon, and fill color
                 shadowColor: Colors.black.withOpacity(0.9),
-                //specify the button's elevation color
                 elevation: 10.0,
-                //buttons Material shadow
                 textStyle: TextStyle(fontFamily: 'roboto'),
-                //specify the button's text TextStyle
                 padding: const EdgeInsets.only(
                     top: 4.0, bottom: 4.0, right: 8.0, left: 8.0),
-                //specify the button's Padding
                 minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 0),
-                //specify the button's first: width and second: height
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        20.0)), // set the buttons shape. Make its birders rounded etc
+                    borderRadius: BorderRadius.circular(20.0)),
               ),
             ),
           ),
