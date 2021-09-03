@@ -3,7 +3,8 @@ import 'package:scherben_boot/models/point.dart';
 import 'package:scherben_boot/services/geolocation.service.dart';
 
 class LocationFormField extends FormField<Point?> {
-  LocationFormField(GeolocationService geolocationService,
+  LocationFormField(GeolocationService geolocationService, double? sizeForText,
+      double? sizeForIcon,
       {required FormFieldSetter<Point?> onSaved,
       required FormFieldValidator<Point?> validator})
       : super(
@@ -23,8 +24,9 @@ class LocationFormField extends FormField<Point?> {
                           ? snapshot.data!.toString()
                           : "Unbekannter Ort";
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
+                      /* Row(
                         children: [
                           Container(
                             width: 10,
@@ -44,6 +46,23 @@ class LocationFormField extends FormField<Point?> {
                             ),
                           )
                         ],
+                      )*/
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.check_circle_outlined,
+                              color: Colors.lightGreen[700],
+                              size: sizeForIcon,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text("Standort erforlgreich erfasst",
+                                style: TextStyle(fontSize: sizeForText)),
+                          ],
+                        ),
                       )
                     ],
                   );
