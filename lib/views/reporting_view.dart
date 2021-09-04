@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:scherben_boot/dependecy_injection/container.dart';
-import 'package:scherben_boot/models/point.dart';
 import 'package:scherben_boot/models/report.dart';
 import 'package:scherben_boot/models/report_metadata.dart';
 import 'package:scherben_boot/services/geolocation.service.dart';
 import 'package:scherben_boot/services/image_provider.service.dart';
 import 'package:scherben_boot/services/reporting.service.dart';
-import 'package:scherben_boot/views/components/location_form_field.dart';
 
 class ReportingView extends StatefulWidget {
   final ReportingService _reportingService = container.resolve();
@@ -57,21 +54,40 @@ class _ReportingViewState extends State<ReportingView> {
                 key: _formKey,
                 child: Column(children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.95,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: LocationFormField(
-                          widget._geolocationService,
-                          MediaQuery.of(context).size.height * 0.02,
-                          MediaQuery.of(context).size.height * 0.05,
-                          onSaved: (value) {},
-                          validator: (value) {},
-                        ),
-                      ),
-                    ),
-                  ),
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Card(
+                          child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.check_circle_outlined,
+                                          color: Colors.lightGreen[700],
+                                          size: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.05,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Standort erforlgreich erfasst",
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.02)),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )))),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
@@ -128,8 +144,9 @@ class _ReportingViewState extends State<ReportingView> {
                                   Expanded(
                                     child: ElevatedButton.icon(
                                       onPressed: () {
-                                        (includeImage) =>
-                                            _updateImagePath(includeImage);
+                                        (includeImage) {
+                                          return _updateImagePath(includeImage);
+                                        };
                                       },
                                       icon: Icon(Icons.image_search),
                                       label: Text("Bild anfügen"),
@@ -191,7 +208,8 @@ class _ReportingViewState extends State<ReportingView> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               final description = _descriptionController.text;
-                              final location = Point(0, 0);
+                              final location = await widget._geolocationService
+                                  .getCurrentUserLocation();
 
                               await widget._reportingService.sendReport(
                                   Report.fromMetadata(widget.metadata,

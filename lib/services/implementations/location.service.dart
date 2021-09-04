@@ -37,8 +37,15 @@ class LocationService implements GeolocationService {
   LocationObserver? _observer;
 
   @override
-  Point? getCurrentUserLocation() {
-    return _lastKnownLocation;
+  Future<Point> getCurrentUserLocation() async {
+    if (_lastKnownLocation != null) {
+      return _lastKnownLocation!;
+    }
+
+    final currentLocation = await _location.getLocation();
+    _lastKnownLocation =
+        Point(currentLocation.latitude!, currentLocation.longitude!);
+    return _lastKnownLocation!;
   }
 
   @override
