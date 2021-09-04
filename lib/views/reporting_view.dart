@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:scherben_boot/dependecy_injection/container.dart';
 import 'package:scherben_boot/models/report.dart';
@@ -23,18 +25,12 @@ class _ReportingViewState extends State<ReportingView> {
   final _descriptionController = TextEditingController();
 
   String? attachmentPath;
-  String? _imagePath;
 
-  Future<void> _updateImagePath(bool includeImage) async {
-    if (!includeImage) {
-      setState(() {
-        _imagePath = null;
-      });
-      return;
-    }
+  Future<void> _pickImage() async {
     final imagePath = await widget._imageProviderService.pickImage();
+    print(imagePath);
     setState(() {
-      _imagePath = imagePath;
+      attachmentPath = imagePath;
     });
   }
 
@@ -143,11 +139,7 @@ class _ReportingViewState extends State<ReportingView> {
                                           const EdgeInsets.only(left: 10.0)),
                                   Expanded(
                                     child: ElevatedButton.icon(
-                                      onPressed: () {
-                                        (includeImage) {
-                                          return _updateImagePath(includeImage);
-                                        };
-                                      },
+                                      onPressed: () => _pickImage(),
                                       icon: Icon(Icons.image_search),
                                       label: Text("Bild anfügen"),
                                       style: ElevatedButton.styleFrom(
@@ -160,7 +152,8 @@ class _ReportingViewState extends State<ReportingView> {
                                           left: 5.0, right: 5.0)),
                                   Expanded(
                                     child: ElevatedButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () =>
+                                          setState(() => attachmentPath = null),
                                       icon: Icon(Icons.delete),
                                       label: Text("Bild entfernen"),
                                       style: ElevatedButton.styleFrom(
@@ -178,20 +171,22 @@ class _ReportingViewState extends State<ReportingView> {
                           height: MediaQuery.of(context).size.height * 0.03,
                         ),
                         Expanded(
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.image_not_supported_outlined,
-                                color: Colors.grey[400],
-                                size:
-                                    MediaQuery.of(context).size.height * 0.125,
-                              ),
-                              Text(
-                                "Kein Bild hinzugefügt",
-                                style: TextStyle(color: Colors.grey[400]),
-                              ),
-                            ],
-                          ),
+                          child: attachmentPath != null
+                              ? Image.file(File(attachmentPath!))
+                              : Column(
+                                  children: [
+                                    Icon(
+                                      Icons.image_not_supported_outlined,
+                                      color: Colors.grey[400],
+                                      size: MediaQuery.of(context).size.height *
+                                          0.125,
+                                    ),
+                                    Text(
+                                      "Kein Bild hinzugefügt",
+                                      style: TextStyle(color: Colors.grey[400]),
+                                    ),
+                                  ],
+                                ),
                         ),
                       ]),
                     ),

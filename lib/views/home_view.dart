@@ -58,4 +58,10 @@ class _HomeViewState extends State<HomeView> {
       ]),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget._geolocationService.cancelSubscription();
+  }
 }

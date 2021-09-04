@@ -4,6 +4,7 @@ import 'package:scherben_boot/models/point.dart';
 typedef LocationObserver = void Function(BoundaryReport);
 
 abstract class GeolocationService {
+  void cancelSubscription();
   Future<Point> getCurrentUserLocation();
   Future<String?> describePoint(Point point);
   void subscribeToBoundaryChanges(LocationObserver observer);

@@ -8,7 +8,7 @@ class ImagePickerImageProviderService implements ImageProviderService {
     while (_isImagePickerActive) {}
     _isImagePickerActive = true;
     final picker = ImagePicker();
-    PickedFile? pick = await picker.getImage(source: ImageSource.camera);
+    PickedFile? pick = await picker.getImage(source: ImageSource.gallery);
     _isImagePickerActive = false;
     return pick?.path;
   }

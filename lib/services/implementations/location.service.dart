@@ -96,4 +96,9 @@ class LocationService implements GeolocationService {
       publishBoundaryReport(event, _observer);
     });
   }
+
+  @override
+  void cancelSubscription() {
+    _observer = null;
+  }
 }
