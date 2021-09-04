@@ -19,8 +19,7 @@ class MailReportingService implements ReportingService {
       ..recipients.add(Address(report.recipient))
       ..subject =
           "[${report.typeIdentifier}] ScherbenBoot report from ${DateTime.now().toString()}"
-      ..text = _createMailBody(report)
-      ..html = _createHTMLBody(report);
+      ..text = _createMailBody(report);
 
     if (report.attachmentPath != null) {
       equivalentMessage.attachments
