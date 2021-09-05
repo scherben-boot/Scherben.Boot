@@ -18,7 +18,7 @@ class DescriptionCard extends StatelessWidget {
             }
             return null;
           },
-          maxLines: 99,
+          maxLines: null,
           decoration: InputDecoration(
             hintText: "Beschreibung",
             enabledBorder: const OutlineInputBorder(

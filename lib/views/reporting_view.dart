@@ -59,39 +59,34 @@ class _ReportingViewState extends State<ReportingView> {
                   Divider(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  Expanded(
-                    child: Align(
-                      alignment: FractionalOffset.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 15.0),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final description = _descriptionController.text;
-                              final location = await widget._geolocationService
-                                  .getCurrentUserLocation();
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          final description = _descriptionController.text;
+                          final location = await widget._geolocationService
+                              .getCurrentUserLocation();
 
-                              await widget._reportingService.sendReport(
-                                  Report.fromMetadata(widget.metadata,
-                                      description, attachmentPath, location));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Meldung wurde erstattet")),
-                              );
-                              Navigator.pop(context);
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blueGrey[500],
-                            minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.95,
-                              MediaQuery.of(context).size.height * 0.05,
-                            ),
-                          ),
-                          child: Text(
-                            "Senden",
-                          ),
+                          await widget._reportingService.sendReport(
+                              Report.fromMetadata(widget.metadata, description,
+                                  attachmentPath, location));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Meldung wurde erstattet")),
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blueGrey[500],
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width * 0.95,
+                          MediaQuery.of(context).size.height * 0.05,
                         ),
+                      ),
+                      child: Text(
+                        "Senden",
                       ),
                     ),
                   ),

@@ -15,31 +15,27 @@ class ImagePickerCard extends FormField<String?> {
                 child: Row(
                   children: [
                     Padding(padding: const EdgeInsets.only(left: 10.0)),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final imagePath =
-                              await imageProviderService.pickImage();
-                          print(imagePath);
-                          state.didChange(imagePath);
-                        },
-                        icon: Icon(Icons.image_search),
-                        label: Text("Bild anfügen"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blueGrey[500],
-                        ),
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        final imagePath =
+                            await imageProviderService.pickImage();
+                        print(imagePath);
+                        state.didChange(imagePath);
+                      },
+                      icon: Icon(Icons.image_search),
+                      label: Text("Bild anfügen"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blueGrey[500],
                       ),
                     ),
                     Padding(
                         padding: const EdgeInsets.only(left: 5.0, right: 5.0)),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () => state.didChange(null),
-                        icon: Icon(Icons.delete),
-                        label: Text("Bild entfernen"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blueGrey[500],
-                        ),
+                    ElevatedButton.icon(
+                      onPressed: () => state.didChange(null),
+                      icon: Icon(Icons.delete),
+                      label: Text("Bild entfernen"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blueGrey[500],
                       ),
                     ),
                     Padding(padding: const EdgeInsets.only(right: 10.0)),
@@ -47,7 +43,7 @@ class ImagePickerCard extends FormField<String?> {
                 ),
               ),
             ),
-            Expanded(
+            Container(
               child: state.value != null
                   ? Image.file(File(state.value!))
                   : Column(
