@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:scherben_boot/services/image_provider.service.dart';
 
@@ -47,7 +49,13 @@ class ImagePickerCard extends FormField<String?> {
                         ),
                       ],
                     ),
-                    Container(child: Text(state.value ?? "Kein Pfad")),
+                    Container(
+                        child: state.value != null
+                            ? Image.file(File(state.value!))
+                            : Text("Kein Bild")),
+                    SizedBox(
+                      height: 1000,
+                    )
                   ],
                 ),
               );
