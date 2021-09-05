@@ -39,8 +39,4 @@ class MailReportingService implements ReportingService {
     Und beschreibt die Situation wie folgt:
       ${report.description}""";
   }
-
-  String _createHTMLBody(Report report) {
-    return "";
-  }
 }

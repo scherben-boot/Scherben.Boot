@@ -1,4 +1,4 @@
-import 'package:kiwi/src/kiwi_container.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:scherben_boot/dependecy_injection/module.dart';
 import 'package:scherben_boot/services/geolocation.service.dart';
 import 'package:scherben_boot/services/implementations/image_picker_image_provider.service.dart';
