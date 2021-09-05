@@ -36,34 +36,27 @@ class _ReportingViewState extends State<ReportingView> {
           appBar: AppBar(
             title: Text(widget.metadata.formTitle),
           ),
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: _formKey,
-                child: Column(children: [
-                  Padding(
-                    padding: EdgeInsets.all(16),
-                    child: LocationDisclaimer(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(16),
-                    child: DescriptionCard(
+          body: SafeArea(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(children: [
+                    LocationDisclaimer(),
+                    DescriptionCard(
                       descriptionController: _descriptionController,
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(16),
-                    child: ImagePickerCard(widget._imageProviderService),
-                  ),
-                  Divider(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
-                    child: ElevatedButton(
+                    ImagePickerCard(
+                      imageProviderService: widget._imageProviderService,
+                      onSaved: (filePath) =>
+                          setState(() => attachmentPath = filePath),
+                    ),
+                    Expanded(child: Divider()),
+                    ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
                           final description = _descriptionController.text;
                           final location = await widget._geolocationService
                               .getCurrentUserLocation();
@@ -89,8 +82,8 @@ class _ReportingViewState extends State<ReportingView> {
                         "Senden",
                       ),
                     ),
-                  ),
-                ]),
+                  ]),
+                ),
               ),
             ),
           ),

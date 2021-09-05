@@ -22,6 +22,7 @@ class MailReportingService implements ReportingService {
       ..text = _createMailBody(report);
 
     if (report.attachmentPath != null) {
+      print("Attachment added: ${report.attachmentPath}");
       equivalentMessage.attachments
           .add(FileAttachment(File(report.attachmentPath!)));
     }
@@ -30,7 +31,8 @@ class MailReportingService implements ReportingService {
   }
 
   String _createMailBody(Report report) {
-    return """Es gab eine neue Meldung vom Typ ${report.typeIdentifier}.
+    final String mainBody =
+        """Es gab eine neue Meldung vom Typ ${report.typeIdentifier}.
     Der Benutzer hat folgende Standortdaten angehängt:
       Latitude: ${report.location.latitude}
       Longitude: ${report.location.longitude}
@@ -38,5 +40,10 @@ class MailReportingService implements ReportingService {
     
     Und beschreibt die Situation wie folgt:
       ${report.description}""";
+
+    if (report.attachmentPath != null) {
+      return mainBody + "\n\rEs ist ein Bild angehängt";
+    }
+    return mainBody;
   }
 }
