@@ -1,4 +1,4 @@
-//import 'package:app_settings/app_settings.dart';
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewOutoffBoundaries extends StatelessWidget {
@@ -19,9 +19,9 @@ class HomeViewOutoffBoundaries extends StatelessWidget {
             Align(
               alignment: FractionalOffset.bottomCenter,
               child: new GestureDetector(
-                /*onTap: () {
+                onTap: () {
                   AppSettings.openLocationSettings();
-                },*/
+                },
                 child: new Text(
                   "Erlauben Sie die Nutzung Ihres Standortes",
                   style: new TextStyle(
