@@ -66,6 +66,22 @@ class _ReportingViewState extends State<ReportingView> {
                         final location = await widget._geolocationService
                             .getCurrentUserLocation();
 
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                backgroundColor: Colors.transparent,
+                                child: SizedBox(
+                                  child: Card(
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
+                                  ),
+                                  width: 150,
+                                  height: 150,
+                                ),
+                              );
+                            });
+
                         await widget._reportingService.sendReport(
                             Report.fromMetadata(widget.metadata, description,
                                 attachmentPath, location));
@@ -73,6 +89,7 @@ class _ReportingViewState extends State<ReportingView> {
                           const SnackBar(
                               content: Text("Meldung wurde erstattet")),
                         );
+                        Navigator.pop(context);
                         Navigator.pop(context);
                       }
                     },
