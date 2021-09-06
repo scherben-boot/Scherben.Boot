@@ -8,6 +8,11 @@ class ReportMetadata {
   final IconData buttonIcon;
   final Color primaryColor;
 
-  ReportMetadata(this.typeIdentifier, this.recipient, this.formTitle,
-      this.buttonDescription, this.buttonIcon, this.primaryColor);
+  ReportMetadata(
+      {required this.typeIdentifier,
+      required this.recipient,
+      required this.formTitle,
+      required this.buttonDescription,
+      required this.buttonIcon,
+      required this.primaryColor});
 }
