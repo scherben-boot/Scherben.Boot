@@ -5,7 +5,7 @@ import 'package:scherben_boot/views/components/reporting_button.dart';
 class HomeViewWithinBoundaries extends StatelessWidget {
   final danger = new ReportMetadata(
       typeIdentifier: "Incident",
-      recipient: "schmidlu@dhbw-loerrach.de",
+      recipient: "scherbenboot.incident@gmail.com",
       formTitle: "Gefahr melden",
       buttonDescription: "Melde eine Gefahr",
       buttonIcon: Icons.warning_amber_outlined,
@@ -13,7 +13,7 @@ class HomeViewWithinBoundaries extends StatelessWidget {
 
   final proposal = new ReportMetadata(
       typeIdentifier: "Proposal",
-      recipient: "sommeref@dhbw-loerrach.de",
+      recipient: "scherbenboot.proposal@gmail.com",
       formTitle: "Neuer Vorschlag",
       buttonDescription: "Mach einen Vorschlag",
       buttonIcon: Icons.emoji_objects_outlined,
