@@ -17,28 +17,6 @@ class ImagePickerCard extends FormField<String?> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        child: state.value != null
-                            ? LimitedBox(
-                                maxHeight: 200,
-                                child: Image.file(
-                                  File(state.value!),
-                                ),
-                              )
-                            : Column(
-                                children: [
-                                  Icon(
-                                    Icons.image_not_supported_outlined,
-                                    color: Colors.grey[400],
-                                    size: 100,
-                                  ),
-                                  Text(
-                                    "Kein Bild hinzugefügt",
-                                    style: TextStyle(color: Colors.grey[400]),
-                                  ),
-                                ],
-                              ),
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -64,6 +42,28 @@ class ImagePickerCard extends FormField<String?> {
                             ),
                           ),
                         ],
+                      ),
+                      Container(
+                        child: state.value != null
+                            ? LimitedBox(
+                                maxHeight: 200,
+                                child: Image.file(
+                                  File(state.value!),
+                                ),
+                              )
+                            : Column(
+                                children: [
+                                  Icon(
+                                    Icons.image_not_supported_outlined,
+                                    color: Colors.grey[400],
+                                    size: 100,
+                                  ),
+                                  Text(
+                                    "Kein Bild hinzugefügt",
+                                    style: TextStyle(color: Colors.grey[400]),
+                                  ),
+                                ],
+                              ),
                       ),
                     ],
                   ),
