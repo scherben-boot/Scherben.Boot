@@ -19,6 +19,7 @@ class DescriptionCard extends StatelessWidget {
             return null;
           },
           maxLines: null,
+          minLines: 10,
           decoration: InputDecoration(
             hintText: "Beschreibung",
             enabledBorder: const OutlineInputBorder(
@@ -30,7 +31,6 @@ class DescriptionCard extends StatelessWidget {
           ),
           controller: descriptionController,
           keyboardType: TextInputType.multiline,
-          textInputAction: TextInputAction.done,
         ),
       ),
     );
