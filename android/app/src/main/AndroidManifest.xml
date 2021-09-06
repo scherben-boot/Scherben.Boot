@@ -3,7 +3,7 @@
   package="com.example.scherben_boot"
 >
    <application
-    android:label="scherben_boot"
+    android:label="ScherbenBoot"
     android:icon="@mipmap/ic_launcher"
   >
         <activity
