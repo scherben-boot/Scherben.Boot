@@ -25,9 +25,6 @@ class HomeViewWithinBoundaries extends StatelessWidget {
         flex: 4,
         child: Column(children: [
           ReportingButton(metadata: danger),
-          SizedBox(
-            height: 20,
-          ),
           ReportingButton(metadata: proposal)
         ]));
   }
