@@ -48,11 +48,23 @@ class _ReportingViewState extends State<ReportingView> {
                         LocationDisclaimer(),
                         DescriptionCard(
                           descriptionController: _descriptionController,
+                          validator: (value) {
+                            if ((value == null || value.isEmpty) &&
+                                attachmentPath == null) {
+                              return "Bitte geben Sie mindestens eine Beschreibung oder ein Bild an";
+                            }
+                          },
                         ),
                         ImagePickerCard(
                           imageProviderService: widget._imageProviderService,
                           onSaved: (filePath) =>
                               setState(() => attachmentPath = filePath),
+                          validator: (value) {
+                            if (value == null &&
+                                _descriptionController.text.isEmpty) {
+                              return "Bitte geben Sie mindestens eine Beschreibung oder ein Bild an";
+                            }
+                          },
                         ),
                       ]),
                     ),

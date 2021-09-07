@@ -3,7 +3,10 @@ import 'package:flutter/widgets.dart';
 
 class DescriptionCard extends StatelessWidget {
   final TextEditingController descriptionController;
-  const DescriptionCard({Key? key, required this.descriptionController})
+  final String? Function(String?) validator;
+
+  const DescriptionCard(
+      {Key? key, required this.descriptionController, required this.validator})
       : super(key: key);
 
   @override
@@ -12,12 +15,7 @@ class DescriptionCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Bitte geben Sie eine Beschreibung an";
-            }
-            return null;
-          },
+          validator: validator,
           maxLines: null,
           minLines: 10,
           decoration: InputDecoration(

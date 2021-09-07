@@ -7,9 +7,11 @@ import 'package:scherben_boot/services/image_provider.service.dart';
 class ImagePickerCard extends FormField<String?> {
   ImagePickerCard(
       {required ImageProviderService imageProviderService,
-      required FormFieldSetter<String?> onSaved})
+      required FormFieldSetter<String?> onSaved,
+      required FormFieldValidator<String?> validator})
       : super(
             onSaved: onSaved,
+            validator: validator,
             builder: (state) {
               return Card(
                 child: Padding(
