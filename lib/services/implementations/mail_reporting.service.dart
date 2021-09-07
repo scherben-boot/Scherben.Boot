@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:intl/intl.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:scherben_boot/dependecy_injection/container.dart';
@@ -12,13 +13,17 @@ class MailReportingService implements ReportingService {
 
   @override
   Future<void> sendReport(Report report) async {
+    DateTime now = DateTime.now();
+    String date = DateFormat('dd.MM.yyyy').format(now);
+    String time = DateFormat('H:m').format(now);
+
     final credentials = await _credentialProvider.getCredentials();
     final smtpServer = gmail(credentials.username, credentials.password);
     final equivalentMessage = Message()
       ..from = Address(credentials.username, "ScherbenBoot")
       ..recipients.add(Address(report.recipient))
       ..subject =
-          "[${report.typeIdentifier}] ScherbenBoot report from ${DateTime.now().toString()}"
+          "[${report.typeIdentifier}] ScherbenBoot Meldung vom $date um $time Uhr"
       ..text = _createMailBody(report);
 
     if (report.attachmentPath != null) {
