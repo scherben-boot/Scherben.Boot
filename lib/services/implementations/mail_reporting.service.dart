@@ -36,16 +36,21 @@ class MailReportingService implements ReportingService {
   }
 
   String _createMailBody(Report report) {
-    final String mainBody =
-        """Neue Meldung der Kategorie ${report.typeIdentifier}.
+    String mainBody = """Neue Meldung der Kategorie ${report.typeIdentifier}.
 
     Der Benutzer hat folgende Standortdaten übermittelt:
       Link: https://www.google.com/maps/search/?api=1&query=${report.location.latitude},${report.location.longitude}
       Breite: ${report.location.latitude}
-      Länge: ${report.location.longitude}
-     
-    Beschreibung der Situation:
+      Länge: ${report.location.longitude}""";
+
+    // Beschreibung der Situation:
+    //    ${report.description}""";
+
+    if (report.description != "") {
+      mainBody = mainBody +
+          """\n\rBeschreibung der Situation:
       ${report.description}""";
+    }
 
     if (report.attachmentPath != null) {
       return mainBody + "\n\rEs ist ein Bild angehängt";

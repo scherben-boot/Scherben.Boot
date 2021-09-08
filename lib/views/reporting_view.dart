@@ -26,6 +26,7 @@ class _ReportingViewState extends State<ReportingView> {
   final _descriptionController = TextEditingController();
 
   String? attachmentPath;
+  bool pic = false;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,6 @@ class _ReportingViewState extends State<ReportingView> {
                         final description = _descriptionController.text;
                         final location = await widget._geolocationService
                             .getCurrentUserLocation();
-
                         showDialog(
                             context: context,
                             builder: (context) {
