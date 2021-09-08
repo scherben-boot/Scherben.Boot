@@ -52,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
         Divider(
           height: 25,
         ),
-        !isWithinBoundaries
+        isWithinBoundaries
             ? HomeViewWithinBoundaries()
             : HomeViewOutoffBoundaries()
       ]),
