@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.sailing),
+        leading: Icon(Icons.sailing_outlined),
         titleSpacing: 0,
         centerTitle: false,
         title: Text('Scherben Boot',
