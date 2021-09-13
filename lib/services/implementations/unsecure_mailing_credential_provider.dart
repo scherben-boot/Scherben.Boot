@@ -4,7 +4,7 @@ import 'package:scherben_boot/services/mailing_credential_provider.service.dart'
 class UnsecureMailingCredentialProvider implements MailingCredentialProvider {
   @override
   Future<MailingCredentials> getCredentials() {
-    return Future.value(MailingCredentials(
-        "scherben.boot@gmail.com", "gBSmAKXcVV\$g:E\"(\$lCZ"));
+    return Future.value(
+        MailingCredentials("scherben.boot@gmail.com", "rqXkXaa]79d5[/h!\"j7("));
   }
 }
