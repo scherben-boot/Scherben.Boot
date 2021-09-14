@@ -1,3 +1,5 @@
+Update 14.09.2021 17:08: Finale Version 1.2.0 durch Apple freigegeben.
+
 # Scherben Boot
 
 Ein Projekt im Rahmen der Vorlesung Software Engineering I im 3. und 4. Semesters an der DHBW Lörrach.  
@@ -21,7 +23,11 @@ Stand 13.09.2021 10:30 Uhr:
 Version 1.0.1 kann bezogen werden, eingeschränkte Funktionalität.  
 Die aktuelle Version 1.1.0 befindet sich noch im Apple Beta Testing, auf die Testdauer kann kein Einfluss genommen werden.  
 Sobald das Beta Testing durchlaufen ist, kann die aktuelle Version mit "TestFlight" heruntergeladen / auf die aktuelle Version aktualisiert werden.  
-Aktualisierung des Status folgt...
+Aktualisierung des Status folgt...  
+UPDATE 14.09.2021 17:08:  
+Die finale Version 1.2.0 ist nach Prüfung nun auch von Apple freigegeben.  
+Sie kann mit TestFlight über den o.g. Link bezogen werden.
+
 
 
 ## Hinweise
